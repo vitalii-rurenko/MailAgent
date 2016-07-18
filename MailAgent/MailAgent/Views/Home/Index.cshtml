@@ -1,0 +1,63 @@
+﻿<div ng-app="app" class="container" ng-controller="mailCtrl" >
+        <div class="col-md-4">            
+            <form role="form" name="emailForm">
+                <div class="form-group ">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="text"  id="email" name="email"  class="form-control" ng-model="formsEmail.EmailAddress" autocomplete="off"/>
+                </div>
+
+                <div class="form-group ">
+                    <label for="user" class="control-label">User Name</label>
+                    <input type="text"  id="user" name="user"  class="form-control" ng-model="formsEmail.UserName" autocomplete="off"/>
+                </div>
+
+                <div class="form-group ">
+                    <label for="subject" class="control-label">Subject</label>
+                    <input type="text"  id="subject" name="subject"  class="form-control" ng-model="formsEmail.Subject" autocomplete="off"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="body" class="control-label">Body</label>
+                    <textarea id="body"  name="body"  class="form-control" rows="8" ng-model="formsEmail.Body"></textarea>
+                </div>
+
+                <button class="btn btn-danger  col-md-offset-5" ng-click="ResetForm()">Reset</button>
+                <button class="btn btn-primary" ng-click="SaveMail()">Save</button>
+            </form>
+        </div>
+        <div class="col-md-8" ng-cloak>
+            <p class="text-left" ><strong>Mails : {{mails.length}}</strong></p>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="scrollable">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Email</strong></td>
+                                    <td><strong>User Name</strong></td>
+                                    <td><strong>Subject</strong></td>
+                                    <td><strong>Body</strong></td>
+                                    <td><strong>Action</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="mail in mails | orderBy:'ID':true">
+                                    <td>{{mail.EmailAddress}}</td>
+                                    <td>{{mail.UserName}}</td>
+                                    <td>{{mail.Subject}}</td>
+                                    <td>{{mail.Body}}</td>
+                                    <td>
+                                        <button class="btn btn-primary" ng-click="EditMail(mail)">E</button>
+                                        <button class="btn btn-danger" ng-click="DeleteMail(mail.ID)">D</button>
+                                    </td>
+                                </tr>
+                                <tr ng-hide="mails.length"><td colspan="6">You have not mails yet! Maybe later</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
